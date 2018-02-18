@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	{% include "snippets/bootstrap3.3.7.html" %}
+    {% include "snippets/fonts.html" %}
+    {% include "snippets/styles.html" %}
+	<title>{% block title %} Shop {% endblock %}</title>
+</head>
+<body>
+<div class="wrapper">
+	<div class="wrapper-content">
+	    {% include "snippets/navbar.html" %}
+        <form action="{% url 'orders:basket_adding' %}" id="csrf_token_base_form">
+            {% csrf_token %}
+		</form>
+    	{% block content %} {% endblock content %}
+	</div>
+</div>
+	{% include "snippets/footer.html" %}
+	{%include "snippets/js.html" %}
+</body>
+</html>

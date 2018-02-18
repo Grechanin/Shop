@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %} {{ title }} | {{ block.super }} {% endblock %}
+
+{% block content %}
+
+<h1 class="title">Залишайте свої контакти в формі нижче</h1>
+<form method="POST" class="form-inline text-center">{% csrf_token %}
+    <div class="form-group">
+        <label for="id_email">Email:</label>
+        <input type="email" class="form-control orange-border" name="email" maxlength="254" required="" id="id_email">
+    </div>
+    <div class="form-group">
+        <label for="id_name">Ваше ім'я:</label>
+        <input type="text" class="form-control orange-border" name="name" maxlength="128" required="" id="id_name">
+    </div>
+    <button type="submit" class="btn orange-btn">Відправити</button>
+</form>
+
+{% endblock content %}

@@ -1,0 +1,62 @@
+{% extends "base.html"%}
+{% block title %} {{ product.name }} || {{ block.super}} {% endblock %}
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+            {% if products_in_basket %}
+                <h2 class="text-center">Товари в корзині</h2>
+                <h4 class="text-center">Загальна сума:</h4><br>
+                <form method="post" class="form-inline text-center">{% csrf_token %}
+                    <div class="form-group">
+                        <label for="client-name"> Ім'я: </label>
+                        <input id="client-name" type="text" class="form-control" name="{{ form.client_name.html_name }}" value="{{ request.POST.client_name }}">
+                        {{ form.errors.client_name }}
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Телефон: </label>
+                        <input id="phone" type="text" class="form-control" name="{{ form.phone.html_name }}" value="{{ request.POST.phone }}">
+                        {{ form.errors.phone }}
+                    </div>
+                    <br><br>
+                    <table class="table text-center">
+                        <thead>
+                        <tr>
+                            <th class="text-center">Назва товару</th>
+                            <th class="text-center">Кількість</th>
+                            <th class="text-center">Ціна за одиницю</th>
+                            <th class="text-center">Загальна ціна</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for product in products_in_basket %}
+                            <tr>
+                                <td>{{ product.product.name }}</td>
+                                <td><input type="number" value="{{ product.nmb }}" class="product-nmb-in-basket" name="product_nmb_in_basket_id_{{ product.id }}"></td>
+                                <td><span class="product-price-pre-item">{{ product.price_pre_item }}</span></td>
+                                <td>
+                                    <span class="total-product-price-in-basket">
+                                        {{ product.total_price }}
+                                    </span>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <div class="text-right">
+                        <b>Загальна сума замовлення: <span id="total_order_amount">55</span></b>
+                    </div>
+                    <br>
+                    <div class="text-right">
+                        <button class="btn btn-primary btn-lg">Замовити</button>
+                    </div>
+                </form>
+            {% else %}
+                <h3 class="text-center">У Вашій корзині немає товарів</h3>
+            {% endif %}
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

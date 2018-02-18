@@ -1,0 +1,57 @@
+{% extends "base.html"%}
+{% block title %} {{ product.name }} || {{ block.super}} {% endblock %}
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+        	<div class="col-md-6">
+        		{% for obj in product.productimage_set.all %}
+        			<div class="product-img">
+						<img src="{{ obj.image.url }}" alt="{{ obj.image.url }}" class="img-responsive">
+					</div>
+        		{% endfor %}
+        	</div>
+        	<div class="col-md-6">
+        		<div>
+        			<h1>{{ product.name }}</h1>
+        		</div>
+        		<div class="">
+        			<p>Ціна: {{ product.price }} грн</p>
+        		</div>
+
+        		<div>
+				  <!-- Nav tabs -->
+				  <ul class="nav nav-tabs" role="tablist">
+				    <li role="presentation" class="active"><a href="#description" aria-controls="description" role="tab" data-toggle="tab">Опис</a></li>
+				    <li role="presentation"><a href="#delivery" aria-controls="delivery" role="tab" data-toggle="tab">Доставка</a></li>
+				    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a></li>
+				    <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
+				  </ul>
+
+				  <!-- Tab panes -->
+				  <div class="tab-content product-tabs">
+				    <div role="tabpanel" class="tab-pane active" id="description">{{ product.description }}</div>
+				    <div role="tabpanel" class="tab-pane" id="delivery"><p>Під браму</p></div>
+				    <div role="tabpanel" class="tab-pane" id="messages">.sdcsdcccc..</div>
+				    <div role="tabpanel" class="tab-pane" id="settings">..ccccccccccccccss.</div>
+				  </div>				  
+				</div>
+
+				<form action="{% url 'orders:basket_adding' %}" class="form-inline" id="form_buying_product">{% csrf_token %}
+					<div class="form-group">
+						<input type="number" id="product-qnt-input" class="form-control product-qnt-input" placeholder="Оберіть кількість">
+					</div>
+
+					<div class="form-group">
+						<button type="submit" id="qnt-submit-btn" class="btn btn-success qnt-submit-btn"
+						data-product_id='{{ product.id }}'
+						data-name='{{ product.name }}'
+						data-price='{{ product.price }}'>Придбати</button>
+					</div>
+				</form>
+
+        	</div>
+        </div>
+    </div>
+
+{% endblock content %}

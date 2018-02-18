@@ -1,0 +1,77 @@
+{% extends "base.html"%}
+{% block title %} Welcome! || {{ block.super}} {% endblock %}
+{% block content %}
+{% load static %}
+<div class="top-section">
+    <img src="{% static 'img/slider0.jpg' %}" alt="slider0" class="img-responsive">
+</div>
+    <div class="section section-1">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-sm-12">
+                    <h1 class="text-center">
+                        Нові надходження
+                    </h1>
+                </div>
+
+                {% for product_image in product_images %}
+                <div class="col-lg-3 col-md-4 col-sm-6 text-center">
+
+                    {% include 'landing/product-item.html' %}
+
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="section section-delivery">
+        <div>
+            <h3>free shiping</h3>
+        </div>
+    </div>
+
+    <div class="section section-2 phones-container">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-sm-12">
+                    <h1 class="text-center">
+                        Телефони
+                    </h1>
+                </div>
+
+                {% for product_image in product_images_phones %}
+                <div class="col-lg-3 col-md-4 col-sm-6 text-center">
+
+                    {% include 'landing/product-item.html' %}
+
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="section section-3 laptops-container">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-sm-12">
+                    <h1 class="text-center">
+                        Ноутбуки
+                    </h1>
+                </div>
+
+                {% for product_image in product_images_laptops %}
+                <div class="col-lg-3 col-md-4 col-sm-6 text-center">
+
+                    {% include 'landing/product-item.html' %}
+
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
